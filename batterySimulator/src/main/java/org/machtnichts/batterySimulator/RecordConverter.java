@@ -19,7 +19,7 @@ public class RecordConverter
         return new EnergyRecord(date,produced,used);
 
       }catch(ParseException pe){
-        System.out.println("RecordConverter: ignored: "+tokens[0]);
+        //System.out.println("RecordConverter: ignored: "+tokens[0]);
       }
 
     }

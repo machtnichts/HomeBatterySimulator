@@ -31,7 +31,7 @@ public class HomeModel{
 
 
   public String toString(){
-    return String.format("produced: %.1f imported: %.1f used: %.1f exported: %.1f battery: %.1f",producedEnergy,importedEnergy,usedEnergy,exportedEnergy,battery.getEnergy());
+    return String.format("produced: %.2fkwh imported: %.2fkwh used: %.2fkwh exported: %.2fkwh in battery: %.2fkwh",producedEnergy/1000,importedEnergy/1000,usedEnergy/1000,exportedEnergy,battery.getEnergy()/1000);
   }
 
 }
