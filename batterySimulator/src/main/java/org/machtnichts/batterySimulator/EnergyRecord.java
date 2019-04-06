@@ -7,8 +7,6 @@ import java.util.Date;
 @AllArgsConstructor
 public class EnergyRecord{
   private Date timestamp;
-  private double importedEnergy;
-  private double exportedEnergy;
   private double producedEnergy;
   private double usedEnergy;
 }

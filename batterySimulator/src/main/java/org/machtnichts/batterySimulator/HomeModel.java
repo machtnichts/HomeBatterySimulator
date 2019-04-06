@@ -17,8 +17,6 @@ public class HomeModel{
   public void process(EnergyRecord energyRecord){
     double produced = energyRecord.getProducedEnergy();
     double used = energyRecord.getUsedEnergy();
-    double exported = energyRecord.getExportedEnergy();
-    double imported = energyRecord.getImportedEnergy();
 
     producedEnergy+=produced;
     usedEnergy+=used;
