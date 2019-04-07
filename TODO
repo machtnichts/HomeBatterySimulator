@@ -1,0 +1,6 @@
+- calculate factor from csv (currently fixed to 4 == 15 minutes)
+- some kind of "user interface" -> command line interface
+  java -jar batterySimulator.jar --batteryCapacity=1 --input=myDataFromSolarEdge.csv --output=simulationResult.csv
+  java -jar batterySimulator.jar -c 1 -i myDataFRomSolarEdge.csv -o simulationResult.csv
+  java -jar batterySimulator.jar --help
+  java -jar batterySimulator.jar -h
