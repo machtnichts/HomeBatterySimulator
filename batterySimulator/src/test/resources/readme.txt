@@ -1,0 +1,2 @@
+$SITE_ID$: ID from SolarEdge Portal
+https://monitoring.solaredge.com/solaredge-web/p/charts/$SITE_ID$/chartExport?st=1514818675000&et=1554681599000&fid=$SITE_ID$&timeUnit=2&pn0=Power&id0=0&t0=0&hasMeters=false
