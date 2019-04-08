@@ -7,7 +7,9 @@ import java.util.*;
 public class CsvReader implements Iterable<String[]>{
 
   private BufferedReader reader;
+  private CsvAdapter csvAdapter;
   public CsvReader(InputStream is){
+    csvAdapter = new CsvAdapter(",");
     try{
       reader = new BufferedReader(new InputStreamReader(is,"UTF-8"));
     }catch(UnsupportedEncodingException e) {
@@ -19,15 +21,6 @@ public class CsvReader implements Iterable<String[]>{
     return new MyIterator();
   }
 
-  public static String[] convertToTokens(String line){
-    String tokens[] = line.split(",");
-    for(int i=0;i<tokens.length;i++){
-      tokens[i]=tokens[i].trim();
-      if(tokens[i].startsWith("\"") && tokens[i].endsWith("\""))
-        tokens[i]=tokens[i].substring(1,tokens[i].length()-1).trim();
-    }
-    return tokens;
-  }
 
   class MyIterator implements Iterator<String[]> {
 
@@ -54,7 +47,7 @@ public class CsvReader implements Iterable<String[]>{
       if(line==null)
         throw new NoSuchElementException();
 
-      return convertToTokens(line);
+      return csvAdapter.convertToTokens(line);
     }
 
     public void remove() {

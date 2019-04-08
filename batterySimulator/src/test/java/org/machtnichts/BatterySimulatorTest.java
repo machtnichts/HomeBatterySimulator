@@ -19,16 +19,16 @@ public class BatterySimulatorTest{
     BatteryModel battery = new BatteryModel(0,100.0);
     HomeModel home = new HomeModel(battery);
     Path path = Paths.get("src","test","resources","testData.csv");
-    simulateFile(path,home);
+    App.simulateFile(path,home,4);
     System.out.println("Home: "+home);
     battery = new BatteryModel(0,100.0);
     home = new HomeModel(battery);
     path = Paths.get("src","test","resources","testData2.csv");
-    simulateFile(path,home);
+    App.simulateFile(path,home,4);
     System.out.println("Home: "+home);
   }
 
-  @Test
+
   public void test201903() {
     for(int batCapa=0;batCapa<=50;batCapa++){
       testBattery(batCapa);
@@ -43,24 +43,13 @@ public class BatterySimulatorTest{
     Arrays.sort(allFilesAndDirs, (f1,f2) -> f1.getName().compareTo(f2.getName()));
     for(File file: allFilesAndDirs )
     {
-      simulateFile(file.toPath(),home);
+      App.simulateFile(file.toPath(),home,4);
     }
     System.out.println("Battery: "+batteryCapacity + " kwh, home stats: "+home);
   }
 
 
 
-  private static void simulateFile(Path path, HomeModel home){
-    //System.out.println("processing file "+path);
-    try{
-      Files.readAllLines(path,Charset.forName("UTF-8")).stream()
-        .map(CsvReader::convertToTokens)
-        .map(RecordConverter::fromTokens)
-        .filter(Objects::nonNull)
-        .forEach(home::process);
-    }catch(IOException ioe){
-      ioe.printStackTrace();
-    }
-  }
+
 
 }
