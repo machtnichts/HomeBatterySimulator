@@ -1,11 +1,12 @@
 package org.machtnichts.csv;
 
 import static org.junit.Assert.*;
-import org.junit.Test;
+import org.junit.*;
 
 
 public class CsvAdapterTest{
   @Test
+  @Ignore
   public void convertToTokensTest() {
     CsvAdapter csvAdapter = new CsvAdapter(",");
     String line = "05.04.2019 13:30,\"0\",\"131.9577\",\"896.5451\",\"1028.5028\",\"896.5452\"";
