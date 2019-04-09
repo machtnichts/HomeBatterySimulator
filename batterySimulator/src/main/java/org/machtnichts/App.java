@@ -17,24 +17,14 @@ public class App {
     try {
       // parse the command line arguments
       CommandLine line = parser.parse( options, args );
-      double batteryCapacity = Double.parseDouble(line.getOptionValue("batteryCapacity", "10"));
+      int batteryCapacity = Integer.parseInt(line.getOptionValue("batteryCapacity", "10"));
       if(line.hasOption("input")){
         File inputFile = new File(line.getOptionValue("input"));
         int timeFactor = Integer.parseInt(line.getOptionValue("timeFactor","4"));
-        BatteryModel battery = new BatteryModel(batteryCapacity*1000,100.0);
-        HomeModel home = new HomeModel(battery);
 
-        if(inputFile.isFile()){
-          simulateFile(inputFile.toPath(),home,timeFactor);
-        }
-        else if(inputFile.isDirectory()){
-          File[] allFilesAndDirs = inputFile.listFiles();
-          Arrays.sort(allFilesAndDirs, (f1,f2) -> f1.getName().compareTo(f2.getName()));
-          for(File file: allFilesAndDirs ){
-            simulateFile(file.toPath(),home,timeFactor);
-          }
-        }
-        System.out.println("result: "+home);
+        System.out.println("batteryCapacity(kwh), batteryDrawn(kwh,saved), batteryStored(kwh), produced(kwh), imported(kwh), used(kwh), exported(kwh)");
+        for(int i=0;i<=batteryCapacity;i++)
+          simulateBattery(inputFile,i,timeFactor);
       }
       else{
         HelpFormatter formatter = new HelpFormatter();
@@ -45,6 +35,26 @@ public class App {
       formatter.printHelp( "java -jar batterySimulator.jar", options );
     }
   }
+
+  private static void simulateBattery(File inputFile, double batteryCapacity, int timeFactor){
+    BatteryModel battery = new BatteryModel(batteryCapacity*1000,100.0);
+    HomeModel home = new HomeModel(battery);
+    if (inputFile.isFile()) {
+      simulateFile(inputFile.toPath(), home, timeFactor);
+    } else if (inputFile.isDirectory()) {
+      File[] allFilesAndDirs = inputFile.listFiles();
+      Arrays.sort(allFilesAndDirs, (f1, f2) -> f1.getName().compareTo(f2.getName()));
+      for (File file : allFilesAndDirs) {
+        simulateFile(file.toPath(), home, timeFactor);
+      }
+    }
+    double factorKwh = 1000;
+    System.out.println(String.format("%-20.0f, %-23.0f, %-18.0f, %-13.0f, %-13.0f, %-9.0f, %-13.0f",
+        battery.getMaxCapacity() / factorKwh, battery.getEnergyDrawn() / factorKwh,
+        battery.getEnergyStored() / factorKwh, home.getProducedEnergy() / factorKwh,
+        home.getImportedEnergy() / factorKwh, home.getUsedEnergy() / factorKwh, home.getExportedEnergy() / factorKwh));
+  }
+
 
   private static Options createOptions(){
     Options options = new Options();

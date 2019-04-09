@@ -5,6 +5,8 @@ public class BatteryModel{
   private final double maxCapacity;
   private double energy;
   private double efficiency;
+  private double energyStored;
+  private double energyDrawn;
 
   public BatteryModel(double capacity, double efficiency){
     maxCapacity=capacity;
@@ -20,11 +22,12 @@ public class BatteryModel{
       throw new IllegalArgumentException("storeEnergy: energy must be positive (actual value: "+energy+")");
 
     double exceededAmount=0;
-    this.energy+=energy;
-    if(this.energy>maxCapacity){
-      exceededAmount = this.energy-maxCapacity;
-      this.energy=maxCapacity;
+    double energyToStore=energy;
+    if((this.energy+energyToStore)>maxCapacity){
+      exceededAmount = (this.energy+energyToStore)-maxCapacity;
+      energyToStore = energy-exceededAmount;
     }
+    increaseEnergy(energyToStore);
     return exceededAmount;
   }
 
@@ -36,14 +39,13 @@ public class BatteryModel{
     if(energy<0.0)
       throw new IllegalArgumentException("drawEnergy: energy must be positive (actual value: "+energy+")");
 
-    double deficit=energy-this.energy;
-    this.energy-=energy;
-    if(this.energy<0){
-      this.energy=0;
-    }else{
-      deficit = 0;
+    double deficit=0;
+    double energyToDraw = energy;
+    if((this.energy-energy)<0){
+      deficit = energy-this.energy;
+      energyToDraw = energy-deficit;
     }
-
+    decreaseEnergy(energyToDraw);
     return deficit;
   }
 
@@ -53,6 +55,17 @@ public class BatteryModel{
 
 
   public String toString(){
-    return String.format("capacity: %.3f, energy: %.3f",maxCapacity,energy);
+    return String.format("max capacity: %.2f, current energy: %.2f, energy ever stored: %.0f, energy ever drawn: %0.f",maxCapacity,energy,energyStored,energyDrawn);
   }
+
+  private void increaseEnergy(double energy){
+    this.energy+=energy;
+    this.energyStored+=energy;
+  }
+
+  private void decreaseEnergy(double energy){
+    this.energy-=energy;
+    this.energyDrawn+=energy;
+  }
+
 }

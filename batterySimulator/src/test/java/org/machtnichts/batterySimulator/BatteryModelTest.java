@@ -24,7 +24,9 @@ public class BatteryModelTest{
   public void drawEnergy(){
     BatteryModel batteryModel = new BatteryModel(1000,100);
     batteryModel.storeEnergy(100.0);
-    batteryModel.drawEnergy(batteryModel.getMaxCapacity()); // must be empty now
+    assertEquals(0.0, batteryModel.drawEnergy(50.0),0.0000000001);
+    assertEquals(50.0, batteryModel.getEnergy(),0.0000000001);
+    assertEquals(0.0, batteryModel.drawEnergy(50.0),0.0000000001); // must be empty now
     assertEquals(1.0, batteryModel.drawEnergy(1.0),0.0000000001);
   }
 
