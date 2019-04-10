@@ -22,7 +22,7 @@ public class App {
         File inputFile = new File(line.getOptionValue("input"));
         int timeFactor = Integer.parseInt(line.getOptionValue("timeFactor","4"));
 
-        System.out.println("batteryCapacity(kwh), batteryDrawn(kwh,saved), batteryStored(kwh), produced(kwh), imported(kwh), used(kwh), exported(kwh)");
+        System.out.println("batteryCapacity(kwh), batteryDrawn(kwh), batteryStored(kwh), produced(kwh), imported(kwh), used(kwh), exported(kwh)");
         for(int i=0;i<=batteryCapacity;i++)
           simulateBattery(inputFile,i,timeFactor);
       }
