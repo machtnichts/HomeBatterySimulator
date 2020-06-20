@@ -1,4 +1,4 @@
-package org.machtnichts.batterySimulator;
+package org.machtnichts.commons;
 import lombok.Data;
 import lombok.AllArgsConstructor;
 import java.util.Date;

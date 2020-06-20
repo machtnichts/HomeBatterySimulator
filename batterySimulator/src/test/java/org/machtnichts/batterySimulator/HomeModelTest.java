@@ -4,6 +4,7 @@ import java.util.Date;
 
 import static org.junit.Assert.*;
 import org.junit.Test;
+import org.machtnichts.commons.EnergyRecord;
 
 public class HomeModelTest{
 

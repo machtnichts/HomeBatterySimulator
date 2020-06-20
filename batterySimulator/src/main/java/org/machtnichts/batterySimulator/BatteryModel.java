@@ -4,13 +4,13 @@ import lombok.Data;
 public class BatteryModel{
   private final double maxCapacity;
   private double energy;
-  private double efficiency;
+ // private double efficiency;
   private double energyStored;
   private double energyDrawn;
 
   public BatteryModel(double capacity, double efficiency){
     maxCapacity=capacity;
-    this.efficiency = efficiency;
+    //this.efficiency = efficiency;
   }
 
   /**

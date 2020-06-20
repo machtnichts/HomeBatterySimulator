@@ -1,4 +1,4 @@
-package org.machtnichts.batterySimulator;
+package org.machtnichts.commons;
 
 import static org.junit.Assert.*;
 import org.junit.Test;

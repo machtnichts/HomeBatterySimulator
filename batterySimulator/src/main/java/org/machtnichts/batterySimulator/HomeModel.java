@@ -1,6 +1,7 @@
 package org.machtnichts.batterySimulator;
 
 import lombok.Data;
+import org.machtnichts.commons.EnergyRecord;
 
 @Data
 public class HomeModel{

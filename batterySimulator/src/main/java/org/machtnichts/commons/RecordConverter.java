@@ -1,4 +1,4 @@
-package org.machtnichts.batterySimulator;
+package org.machtnichts.commons;
 
 import java.text.SimpleDateFormat;
 import java.text.ParseException;
